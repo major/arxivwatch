@@ -6,7 +6,7 @@ from arxivwatch.config import Settings
 def test_rss_urls_shorthand_expansion(monkeypatch):
     """Test that shorthand RSS URLs are expanded."""
     monkeypatch.setenv("ARXIV_RSS_URLS", '["cs.AI", "cs.LG"]')
-    monkeypatch.setenv("ARXIV_CLAUDE_API_KEY", "test-key")
+    monkeypatch.setenv("ARXIV_GEMINI_API_KEY", "test-key")
     monkeypatch.setenv("ARXIV_SMTP_HOST", "smtp.example.com")
     monkeypatch.setenv("ARXIV_SMTP_USERNAME", "user")
     monkeypatch.setenv("ARXIV_SMTP_PASSWORD", "pass")
@@ -27,7 +27,7 @@ def test_rss_urls_full_urls_preserved(monkeypatch):
         "ARXIV_RSS_URLS",
         '["https://rss.arxiv.org/rss/cs.AI", "https://example.com/feed.xml"]',
     )
-    monkeypatch.setenv("ARXIV_CLAUDE_API_KEY", "test-key")
+    monkeypatch.setenv("ARXIV_GEMINI_API_KEY", "test-key")
     monkeypatch.setenv("ARXIV_SMTP_HOST", "smtp.example.com")
     monkeypatch.setenv("ARXIV_SMTP_USERNAME", "user")
     monkeypatch.setenv("ARXIV_SMTP_PASSWORD", "pass")
@@ -45,7 +45,7 @@ def test_rss_urls_full_urls_preserved(monkeypatch):
 def test_rss_urls_mixed(monkeypatch):
     """Test mixing shorthand and full URLs."""
     monkeypatch.setenv("ARXIV_RSS_URLS", '["cs.AI", "https://example.com/feed.xml"]')
-    monkeypatch.setenv("ARXIV_CLAUDE_API_KEY", "test-key")
+    monkeypatch.setenv("ARXIV_GEMINI_API_KEY", "test-key")
     monkeypatch.setenv("ARXIV_SMTP_HOST", "smtp.example.com")
     monkeypatch.setenv("ARXIV_SMTP_USERNAME", "user")
     monkeypatch.setenv("ARXIV_SMTP_PASSWORD", "pass")
