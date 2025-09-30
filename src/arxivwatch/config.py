@@ -18,6 +18,15 @@ class Settings(BaseSettings):
         default=["cs.AI", "cs.CE", "q-fin", "stat.ML", "econ"],
     )
 
+    @field_validator("rss_urls", mode="before")
+    @classmethod
+    def parse_rss_urls(cls, v: Any) -> list[str]:
+        """Parse rss_urls from JSON string if needed."""
+        if isinstance(v, str):
+            import json
+            return json.loads(v)
+        return v
+
     @field_validator("rss_urls", mode="after")
     @classmethod
     def expand_rss_urls(cls, v: list[str]) -> list[str]:
@@ -89,7 +98,17 @@ class Settings(BaseSettings):
     )
     smtp_to: list[EmailStr] = Field(
         description="List of recipient email addresses",
+        json_schema_extra={"env_parse": "json"},
     )
+
+    @field_validator("smtp_to", mode="before")
+    @classmethod
+    def parse_smtp_to(cls, v: Any) -> list[str]:
+        """Parse smtp_to from JSON string if needed."""
+        if isinstance(v, str):
+            import json
+            return json.loads(v)
+        return v
 
     # Storage Configuration
     storage_file: str = Field(
