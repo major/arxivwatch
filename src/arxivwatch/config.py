@@ -96,19 +96,9 @@ class Settings(BaseSettings):
     smtp_from: EmailStr = Field(
         description="From email address",
     )
-    smtp_to: list[EmailStr] = Field(
-        description="List of recipient email addresses",
-        json_schema_extra={"env_parse": "json"},
+    smtp_to: EmailStr = Field(
+        description="Recipient email address",
     )
-
-    @field_validator("smtp_to", mode="before")
-    @classmethod
-    def parse_smtp_to(cls, v: Any) -> list[str]:
-        """Parse smtp_to from JSON string if needed."""
-        if isinstance(v, str):
-            import json
-            return json.loads(v)
-        return v
 
     # Storage Configuration
     storage_file: str = Field(

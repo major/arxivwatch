@@ -56,7 +56,7 @@ def main() -> None:
             smtp_username=settings.smtp_username,
             smtp_password=settings.smtp_password.get_secret_value(),
             from_address=str(settings.smtp_from),
-            to_addresses=[str(email) for email in settings.smtp_to],
+            to_addresses=[str(settings.smtp_to)],
         )
 
         # Load previously notified paper IDs
